@@ -1,0 +1,54 @@
+#include "../includes/so_long.h"
+
+void	free_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while(map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
+}
+
+void	free_all_game(t_list *lst)
+{
+	if (lst->map)
+		free_map(lst->map);
+	destroy_images(lst);
+	// free_map(lst->map);
+	mlx_destroy_window(lst->mlx, lst->window);
+	mlx_destroy_display(lst->mlx);
+	free(lst->mlx);
+	// free(lst);
+}
+
+void	destroy_images(t_list *lst)
+{
+	mlx_destroy_image(lst->mlx, lst->img_exit);
+	mlx_destroy_image(lst->mlx, lst->img_floor);
+	// mlx_destroy_image(lst->mlx, lst->img_perso);	
+	mlx_destroy_image(lst->mlx, lst->img_wall);
+	mlx_destroy_image(lst->mlx, lst->img_coin);
+	mlx_destroy_image(lst->mlx, lst->player.player_up);
+	mlx_destroy_image(lst->mlx, lst->player.player_down);
+	mlx_destroy_image(lst->mlx, lst->player.player_left);
+	// mlx_destroy_image(lst->mlx, lst->player.player_right);
+}
+
+void	ft_error(char *message, t_list *lst)
+{
+	free(lst);
+	ft_printf(RED"Error\n"GREY"%s\n"RESET, message);
+	exit(EXIT_FAILURE);
+}
+
+void	ft_free_error(char *message, t_list *lst)
+{
+	free_map(lst->map);
+	free(lst);
+	ft_printf(RED"Error\n"GREY"%s\n"RESET, message);
+	exit(EXIT_FAILURE);
+}
