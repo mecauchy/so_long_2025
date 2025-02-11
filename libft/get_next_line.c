@@ -1,5 +1,15 @@
 #include "../includes/libft.h"
 
+
+// void	free_gnl_buffer(void)
+// {
+// 	if (next_str)
+// 	{
+// 		free(next_str)
+// 		next_str = NULL;
+// 	}
+// }
+
 char	*new_line(char *next_str)
 {
 	char	*str;

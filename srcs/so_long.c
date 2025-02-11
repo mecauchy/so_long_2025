@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:10:43 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/11 17:35:44 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/11 20:16:31 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,12 +285,13 @@ void	check_cmd_arguments(int ac, char **av, t_list *lst)
 int	main(int ac, char **av)
 {
 	t_list	lst;
-	
+
 	check_cmd_arguments(ac, av, &lst);
 	lst.path = av[1];
 	lst.fd = open(lst.path, O_RDONLY);
 	if (lst.fd < 0)
 		ft_error("Error : Map file is missing", &lst);
+	close(lst.fd);
 	init_game(&lst);
 	parsing(&lst);
 	lst.mlx = mlx_init();
@@ -303,6 +304,6 @@ int	main(int ac, char **av)
 	launch_presentation(&lst);
 	mlx_loop(lst.mlx);
 	free_all_game(&lst);
-	close(lst.fd);
+	// close(lst.fd);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:39:17 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/11 14:44:22 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/11 20:35:47 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,4 +125,5 @@ void			free_all_game(t_list *lst);
 void			free_map(char **map);
 void			check_parameters(t_list *lst);
 void			check_cmd_arguments(int ac, char **av, t_list *lst);
+void			gnl_cleanup(void);
 #endif
