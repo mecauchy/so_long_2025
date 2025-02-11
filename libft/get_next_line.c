@@ -1,15 +1,5 @@
 #include "../includes/libft.h"
 
-
-// void	free_gnl_buffer(void)
-// {
-// 	if (next_str)
-// 	{
-// 		free(next_str)
-// 		next_str = NULL;
-// 	}
-// }
-
 char	*new_line(char *next_str)
 {
 	char	*str;
@@ -92,9 +82,10 @@ char	*read_to_next_str(char *next_str, int fd)
 	return (next_str);
 }
 
+static char	*next_str = NULL;
+
 char	*get_next_line(int fd)
 {
-	static char	*next_str = NULL;
 	char		*ret;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
@@ -112,4 +103,10 @@ char	*get_next_line(int fd)
 	else
 		next_str = new_line(next_str);
 	return (ret);
+}
+
+void gnl_cleanup(void)
+{
+	free(next_str);
+	next_str = NULL;
 }

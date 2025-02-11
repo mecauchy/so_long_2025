@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:48:45 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/11 20:39:30 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/11 22:41:14 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,49 +49,12 @@
 // 	}
 // }
 
-void	stock_map(t_list *lst)
-{
-	char	*line;
-	char	*tmp;
-	int		file;
-	
-	file = open(lst->path, O_RDONLY);
-	if (file < 0)
-		ft_error("The map couldn't be opened", lst);
-	line = get_next_line(file);
-	if (!line)
-		return ;
-	lst->stock = ft_strdup("");
-	if (!lst->stock)
-		free(line);
-	while (line)
-	{
-		tmp = lst->stock;
-		lst->stock = ft_strjoin(lst->stock, line);
-		free(tmp);
-		free(line);
-		line = get_next_line(file);
-	}
-	lst->map = ft_split(lst->stock, '\n');
-	if (!lst->map)
-	{
-		ft_putendl_fd("Error : invalid map 01", 2);
-		free(lst->stock);
-		free(line);
-		close(file);
-		exit(1);
-	}
-	close(file);
-	// free(line);
-	free(lst->stock);
-}
-
 // void	stock_map(t_list *lst)
 // {
 // 	char	*line;
 // 	char	*tmp;
 // 	int		file;
-
+	
 // 	file = open(lst->path, O_RDONLY);
 // 	if (file < 0)
 // 		ft_error("The map couldn't be opened", lst);
@@ -100,22 +63,13 @@ void	stock_map(t_list *lst)
 // 		return ;
 // 	lst->stock = ft_strdup("");
 // 	if (!lst->stock)
-// 	{
-// 		free(line);  // Correction 3: Libère line si ft_strdup échoue
-// 		close(file);
-// 		ft_error("Memory allocation failed", lst);
-// 	}
+// 		free(line);
 // 	while (line)
 // 	{
 // 		tmp = lst->stock;
-// 		lst->stock = ft_strjoin(tmp, line);
+// 		lst->stock = ft_strjoin(lst->stock, line);
 // 		free(tmp);
 // 		free(line);
-// 		if (!lst->stock)  // Correction 2: Gestion d'erreur ft_strjoin
-// 		{
-// 			close(file);
-// 			ft_error("Memory allocation failed", lst);
-// 		}
 // 		line = get_next_line(file);
 // 	}
 // 	lst->map = ft_split(lst->stock, '\n');
@@ -123,12 +77,67 @@ void	stock_map(t_list *lst)
 // 	{
 // 		ft_putendl_fd("Error : invalid map 01", 2);
 // 		free(lst->stock);
+// 		free(line);
 // 		close(file);
 // 		exit(1);
 // 	}
 // 	close(file);
-// 	// free(lst->stock);  // Correction 1: Supprimé pour éviter le double free
+// 	// free(line);
+// 	free(lst->stock);
 // }
+
+void	stock_map(t_list *lst)
+{
+	char	*line;
+	char	*tmp;
+	int		file;
+
+	file = open(lst->path, O_RDONLY);
+	if (file < 0)
+		ft_error("The map couldn't be opened", lst);
+	
+	// Initialisation sécurisée du buffer
+	lst->stock = ft_strdup("");
+	if (!lst->stock)
+	{
+		close(file);
+		ft_error("Memory allocation failed", lst);
+	}
+
+	// Lecture ligne par ligne
+	while (1)
+	{
+		line = get_next_line(file);
+		if (!line)
+			break ;
+		
+		// Jointure sécurisée avec gestion d'erreur
+		tmp = lst->stock;
+		lst->stock = ft_strjoin(tmp, line);
+		free(tmp);
+		free(line);
+		
+		if (!lst->stock)
+		{
+			close(file);
+			ft_error("Memory allocation failed", lst);
+		}
+	}
+
+	// Conversion finale en map 2D
+	lst->map = ft_split(lst->stock, '\n');
+	free(lst->stock); // Libération IMMÉDIATE après split
+	lst->stock = NULL;
+	
+	if (!lst->map)
+	{
+		close(file);
+		gnl_cleanup(); // Nettoyage du buffer GNL
+		ft_error("Invalid map format", lst);
+	}
+	close(file);
+	gnl_cleanup(); // Nettoyage final du buffer GNL
+}
 
 void	check_corner(t_list *lst)
 {
@@ -282,5 +291,5 @@ void	parsing(t_list *lst)
 	check_corner(lst);
 	fill_mapinfo(lst);
 	check_parameters(lst);
-	// gnl_cleanup();
+	gnl_cleanup();
 }
