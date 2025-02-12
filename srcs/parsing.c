@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:48:45 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/11 22:41:14 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:26:38 by mcauchy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,48 +95,39 @@ void	stock_map(t_list *lst)
 	file = open(lst->path, O_RDONLY);
 	if (file < 0)
 		ft_error("The map couldn't be opened", lst);
-	
-	// Initialisation sécurisée du buffer
 	lst->stock = ft_strdup("");
 	if (!lst->stock)
 	{
 		close(file);
+		gnl_cleanup();
 		ft_error("Memory allocation failed", lst);
 	}
-
-	// Lecture ligne par ligne
 	while (1)
 	{
 		line = get_next_line(file);
 		if (!line)
 			break ;
-		
-		// Jointure sécurisée avec gestion d'erreur
 		tmp = lst->stock;
 		lst->stock = ft_strjoin(tmp, line);
 		free(tmp);
 		free(line);
-		
 		if (!lst->stock)
 		{
 			close(file);
 			ft_error("Memory allocation failed", lst);
 		}
 	}
-
-	// Conversion finale en map 2D
 	lst->map = ft_split(lst->stock, '\n');
-	free(lst->stock); // Libération IMMÉDIATE après split
+	free(lst->stock);
 	lst->stock = NULL;
-	
 	if (!lst->map)
 	{
 		close(file);
-		gnl_cleanup(); // Nettoyage du buffer GNL
+		gnl_cleanup();
 		ft_error("Invalid map format", lst);
 	}
 	close(file);
-	gnl_cleanup(); // Nettoyage final du buffer GNL
+	gnl_cleanup();
 }
 
 void	check_corner(t_list *lst)
@@ -196,35 +187,31 @@ int	size_map(t_list *lst)
 	count = 0;
 	lst->fd = open(lst->path, O_RDONLY);
 	if (lst->fd < 0)
-	{
-		ft_putendl_fd("Error : cannot open file", 2);
-		exit(1);		
-	}
+		ft_error("Cannot open file", lst);
 	line = get_next_line(lst->fd);
-	while (line != NULL)
+	if (!line)
 	{
-		len = ft_strlen(line);
-		if (len > 0 && line[len - 1] == '\n')
-			len--;
-		if (count == 0)
-			lst->longueur_map = len;
-		else if (lst->longueur_map != len)
-		{		
-			ft_putendl_fd("Error : invalid map 02", 2);
-			free(line);
-			free(lst->stock);
-			if (lst->map)
-				free_map(lst->map);
-			close(lst->fd);
-			exit(1);
-		}
+		gnl_cleanup();
+		close(lst->fd);
+		ft_error("Empty file", lst);
+	}
+	gnl_cleanup();
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		len--;	
+	lst->longueur_map = len;
+	while (line)
+	{
+		count++;
 		free(line);
 		line = get_next_line(lst->fd);
-		count++;
+		gnl_cleanup();
+		// if (!line)
+		// 	break ;
 	}
-	// free(line);
 	lst->largeur_map = count;
 	close(lst->fd);
+	gnl_cleanup();
 	return (count);
 }
 

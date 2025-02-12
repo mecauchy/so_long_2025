@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_all.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/12 12:42:50 by mcauchy-          #+#    #+#             */
+/*   Updated: 2025/02/12 12:42:51 by mcauchy-         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/so_long.h"
 
 void	free_map(char **map)
@@ -29,13 +41,15 @@ void	destroy_images(t_list *lst)
 {
 	mlx_destroy_image(lst->mlx, lst->img_exit);
 	mlx_destroy_image(lst->mlx, lst->img_floor);
-	// mlx_destroy_image(lst->mlx, lst->img_perso);	
+	// if (lst->img_perso)
+	// 	mlx_destroy_image(lst->mlx, lst->img_perso);	
 	mlx_destroy_image(lst->mlx, lst->img_wall);
 	mlx_destroy_image(lst->mlx, lst->img_coin);
 	mlx_destroy_image(lst->mlx, lst->player.player_up);
 	mlx_destroy_image(lst->mlx, lst->player.player_down);
 	mlx_destroy_image(lst->mlx, lst->player.player_left);
-	// mlx_destroy_image(lst->mlx, lst->player.player_right);
+	if (lst->player.player_right)
+	mlx_destroy_image(lst->mlx, lst->player.player_right);
 }
 
 void	ft_error(char *message, t_list *lst)
