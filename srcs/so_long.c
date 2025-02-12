@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:10:43 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/12 18:35:30 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:50:02 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ int	key_press(int key, t_list *lst)
 {
 	set_player_position(lst, key);
 	if (key == ESC)
-		exit(1);
+		free_exit_game(lst);
 	if (key == UP || key == W)
 		move_up(lst);
 	if (key == DOWN || key == S)
@@ -147,7 +147,7 @@ void	exit_game(t_list *lst, int value)
 
 int	free_exit_game(t_list *lst)
 {
-	ft_printf("Sortie du jeu ...");
+	ft_printf(CYAN"Sortie du jeu ...\n"RESET);
 	free_all_game(lst);
 	exit(EXIT_FAILURE);
 	return (0);
@@ -155,6 +155,7 @@ int	free_exit_game(t_list *lst)
 
 void	init_game(t_list *lst)
 {
+	ft_bzero(lst, sizeof(lst));
 	lst->window = NULL;
 	lst->map = NULL;
 	lst->img_wall = NULL;
@@ -191,12 +192,11 @@ void	destroy_prsentation(t_list *lst)
 
 int	presentation_keypress(int key, t_list *lst)
 {
-	if (key == SPACE)
+	if (key == ENTER)
 	{
 		destroy_prsentation(lst);
 		mlx_destroy_window(lst->mlx, lst->presentation_win);
 		lst->window = mlx_new_window(lst->mlx, lst->longueur_map * 32, lst->largeur_map * 32, "so_long");
-		printf("hello boucle\n");
 		assign_map(lst);
 		find_position(lst);
 		create_map(lst);

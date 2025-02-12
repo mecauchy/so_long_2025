@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:39:17 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/12 18:05:32 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:45:18 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 # define ESC		65307
 # define SPACE		32
+# define ENTER		65293
 
 # define CYAN		"\033[1;96m"
 # define RESET		"\033[0m"
