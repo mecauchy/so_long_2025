@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:48:45 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/12 12:26:38 by mcauchy-         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:33:06 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	stock_map(t_list *lst)
 	if (!lst->stock)
 	{
 		close(file);
-		gnl_cleanup();
+		// gnl_cleanup();
 		ft_error("Memory allocation failed", lst);
 	}
 	while (1)
@@ -123,11 +123,10 @@ void	stock_map(t_list *lst)
 	if (!lst->map)
 	{
 		close(file);
-		gnl_cleanup();
+		// gnl_cleanup();
 		ft_error("Invalid map format", lst);
 	}
 	close(file);
-	gnl_cleanup();
 }
 
 void	check_corner(t_list *lst)
@@ -191,11 +190,11 @@ int	size_map(t_list *lst)
 	line = get_next_line(lst->fd);
 	if (!line)
 	{
-		gnl_cleanup();
+		// gnl_cleanup();
 		close(lst->fd);
 		ft_error("Empty file", lst);
 	}
-	gnl_cleanup();
+	// gnl_cleanup();
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
 		len--;	
@@ -205,13 +204,13 @@ int	size_map(t_list *lst)
 		count++;
 		free(line);
 		line = get_next_line(lst->fd);
-		gnl_cleanup();
+		// gnl_cleanup();
 		// if (!line)
 		// 	break ;
 	}
 	lst->largeur_map = count;
 	close(lst->fd);
-	gnl_cleanup();
+	// gnl_cleanup();
 	return (count);
 }
 
@@ -278,5 +277,5 @@ void	parsing(t_list *lst)
 	check_corner(lst);
 	fill_mapinfo(lst);
 	check_parameters(lst);
-	gnl_cleanup();
+	// gnl_cleanup();
 }

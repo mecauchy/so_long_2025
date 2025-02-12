@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:52:47 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/12 12:34:36 by mcauchy-         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:08:59 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,9 @@ void	move_right(t_list *lst)
 		if (lst->map[lst->y][lst->x + 1] == 'E')
 		{
 			if (lst->map_info.nb_collectible == 0)
+			{
 				exit_game(lst, 1);
+			}
 		}
 		if (lst->map[lst->y][lst->x + 1] == '0')
 			lst->map[lst->y][lst->x + 1] = 'P';

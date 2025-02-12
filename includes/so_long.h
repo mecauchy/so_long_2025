@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:39:17 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/11 20:35:47 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:05:32 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef	struct s_list
 	void	*img_coin;
 	void	*img_perso;
 	void	*img_floor;
+	void	*img_default;
 	void	*presentation_background;
 	void	*start_button;
 	void	*presentation_window;
@@ -126,4 +127,5 @@ void			free_map(char **map);
 void			check_parameters(t_list *lst);
 void			check_cmd_arguments(int ac, char **av, t_list *lst);
 void			gnl_cleanup(void);
+
 #endif

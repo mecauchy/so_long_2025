@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:50 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/12 12:42:51 by mcauchy-         ###   ########.fr       */
+/*   Updated: 2025/02/12 18:33:45 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,34 +27,40 @@ void	free_map(char **map)
 
 void	free_all_game(t_list *lst)
 {
+	destroy_images(lst);
 	if (lst->map)
 		free_map(lst->map);
-	destroy_images(lst);
-	// free_map(lst->map);
 	mlx_destroy_window(lst->mlx, lst->window);
 	mlx_destroy_display(lst->mlx);
 	free(lst->mlx);
-	// free(lst);
 }
 
 void	destroy_images(t_list *lst)
 {
-	mlx_destroy_image(lst->mlx, lst->img_exit);
-	mlx_destroy_image(lst->mlx, lst->img_floor);
-	// if (lst->img_perso)
-	// 	mlx_destroy_image(lst->mlx, lst->img_perso);	
-	mlx_destroy_image(lst->mlx, lst->img_wall);
-	mlx_destroy_image(lst->mlx, lst->img_coin);
-	mlx_destroy_image(lst->mlx, lst->player.player_up);
-	mlx_destroy_image(lst->mlx, lst->player.player_down);
-	mlx_destroy_image(lst->mlx, lst->player.player_left);
+	if (lst->img_exit)
+		mlx_destroy_image(lst->mlx, lst->img_exit);
+	if (lst->img_floor)
+		mlx_destroy_image(lst->mlx, lst->img_floor);
+	if (lst->img_wall)
+		mlx_destroy_image(lst->mlx, lst->img_wall);
+	if (lst->img_coin)
+		mlx_destroy_image(lst->mlx, lst->img_coin);
+	if (lst->img_default)
+		mlx_destroy_image(lst->mlx, lst->img_default);
+	if (lst->player.player_up)
+		mlx_destroy_image(lst->mlx, lst->player.player_up);
+	if (lst->player.player_down)
+		mlx_destroy_image(lst->mlx, lst->player.player_down);
+	if (lst->player.player_left)
+		mlx_destroy_image(lst->mlx, lst->player.player_left);
 	if (lst->player.player_right)
-	mlx_destroy_image(lst->mlx, lst->player.player_right);
+		mlx_destroy_image(lst->mlx, lst->player.player_right);
 }
 
 void	ft_error(char *message, t_list *lst)
 {
-	free(lst);
+	if (!lst)
+		free(lst);
 	ft_printf(RED"Error\n"GREY"%s\n"RESET, message);
 	exit(EXIT_FAILURE);
 }
