@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:10:43 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/12 18:50:02 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:33:42 by mcauchy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,21 @@ void	assign_map(t_list *lst)
 	lst->img_perso = mlx_xpm_file_to_image(lst->mlx, "textures/player.xpm", &lst->img_longueur, &lst->img_largeur);
 	lst->img_default = mlx_xpm_file_to_image(lst->mlx, "textures/default.xpm", &lst->img_longueur, &lst->img_largeur);
 	if (!lst->img_wall || !lst->img_coin || !lst->img_exit || !lst->img_floor || !lst->img_perso || !lst->img_default)
-		// free_all_game(lst);
-		ft_error("Cannot creating map", lst);
+	{
+		if (lst->map)
+			free_map(lst->map);
+		mlx_destroy_window(lst->mlx, lst->window);
+		mlx_destroy_display(lst->mlx);
+		free(lst->mlx);
+		exit(EXIT_FAILURE);
+	}
 	lst->player.player_up = mlx_xpm_file_to_image(lst->mlx, "textures/player_up.xpm", &lst->img_longueur, &lst->img_largeur);
 	lst->player.player_down = mlx_xpm_file_to_image(lst->mlx, "textures/player_down.xpm", &lst->img_longueur, &lst->img_largeur);
 	lst->player.player_left = mlx_xpm_file_to_image(lst->mlx, "textures/player_left.xpm", &lst->img_longueur, &lst->img_largeur);
 	lst->player.player_right = mlx_xpm_file_to_image(lst->mlx, "textures/player_right.xpm", &lst->img_longueur, &lst->img_largeur);
 	if (!lst->player.player_up || !lst->player.player_down || !lst->player.player_left || !lst->player.player_right)
-	{
 		ft_error("Missing player", lst);
 		// free_all_game(lst);
-	}
 }
 
 int	create_map(t_list *lst)
@@ -64,7 +68,11 @@ int	create_map(t_list *lst)
 		while (x < lst->longueur_map)
 		{
 			if (lst->map[y][x] == '1')
+			{
+				if (lst->img_wall == NULL)
+					free_all_game(lst);	
 				mlx_put_image_to_window(lst->mlx, lst->window, lst->img_wall, x * 32, y * 32);
+			}
 			if (lst->map[y][x] == '0')
 				mlx_put_image_to_window(lst->mlx, lst->window, lst->img_floor, x * 32, y * 32);
 			if (lst->map[y][x] == 'C')
@@ -133,7 +141,6 @@ int	key_press(int key, t_list *lst)
 		move_left(lst);
 	if (key == RIGHT || key == D)
 		move_right(lst);
-	printf("---------nb collectibles == %d\n", lst->map_info.nb_collectible);
 	return (0);
 }
 
@@ -224,24 +231,24 @@ void	launch_presentation(t_list *lst)
 	mlx_hook(lst->presentation_win, KeyPress, KeyPressMask, presentation_keypress, lst);
 }
 
-void	check_cmd_arguments(int ac, char **av, t_list *lst)
+void	check_cmd_arguments(int ac, char **av)
 {
 	if (ac > 2)
-		ft_error("Arguments : Too many arguments", lst);
+		exit_error("Arguments : Too many arguments");
 	if (ac < 2)
-		ft_error("Arguments : Map file is missing", lst);
+		exit_error("Arguments : Map file is missing");
 	if (ft_strncmp(av[1] + ft_strlen(av[1]) - 4, ".ber", 4))
-		ft_error("Arguments : Map file is not a .ber file", lst);
+		exit_error("Arguments : Map file is not a .ber file");
 }
 int	main(int ac, char **av)
 {
 	t_list	lst;
 
-	check_cmd_arguments(ac, av, &lst);
+	check_cmd_arguments(ac, av);
 	lst.path = av[1];
 	lst.fd = open(lst.path, O_RDONLY);
 	if (lst.fd < 0)
-		ft_error("Error : Map file is missing", &lst);
+		exit_error("Error : Map file is missing");
 	close(lst.fd);
 	init_game(&lst);
 	parsing(&lst);

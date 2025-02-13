@@ -6,7 +6,7 @@
 /*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 10:56:12 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/12 11:28:46 by mcauchy-         ###   ########.fr       */
+/*   Updated: 2025/02/13 12:35:04 by mcauchy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	stock_map(t_list *lst)
 
 	file = open(lst->path, O_RDONLY);
 	if (file < 0)
-		ft_error("The map couldn't be opened", lst);
+		exit_error("The map couldn't be opened", lst);
 	
 	// Initialisation sécurisée du buffer
 	lst->stock = ft_strdup("");

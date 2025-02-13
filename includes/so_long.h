@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:39:17 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/12 18:45:18 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/13 12:32:06 by mcauchy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,11 @@ void			destroy_images(t_list *lst);
 void			free_all_game(t_list *lst);
 void			free_map(char **map);
 void			check_parameters(t_list *lst);
-void			check_cmd_arguments(int ac, char **av, t_list *lst);
+void			check_cmd_arguments(int ac, char **av);
 void			gnl_cleanup(void);
+int				check_size_line(t_list *lst);
+void			check_valide_map(t_list *lst);
+void			check_size(t_list *lst);
+void			exit_error(char *message);
 
 #endif

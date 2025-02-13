@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+         #
+#    By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/05 14:00:29 by mcauchy-          #+#    #+#              #
-#    Updated: 2025/02/12 17:21:28 by mecauchy         ###   ########.fr        #
+#    Updated: 2025/02/13 16:43:29 by mcauchy-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ INCLUDES		=	-I . \
 			
 OBJ_FILES		=	$(SRC_FILES:.c=.o)
 
-CC				=	gcc -g3
+#CC				=	gcc -g3
+CC = gcc -O0 -g -fsanitize=address
 
 CFLAGS			=	-Wall -Wextra -Werror
 

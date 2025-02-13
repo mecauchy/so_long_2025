@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:50 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/12 18:33:45 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/13 14:41:49 by mcauchy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,16 +59,20 @@ void	destroy_images(t_list *lst)
 
 void	ft_error(char *message, t_list *lst)
 {
-	if (!lst)
+	if (lst)
 		free(lst);
-	ft_printf(RED"Error\n"GREY"%s\n"RESET, message);
+	ft_printf(RED"\nError\n"GREY"%s\n"RESET, message);
 	exit(EXIT_FAILURE);
 }
 
 void	ft_free_error(char *message, t_list *lst)
 {
 	free_map(lst->map);
-	free(lst);
-	ft_printf(RED"Error\n"GREY"%s\n"RESET, message);
+	ft_printf(RED"\nError\n"GREY"%s\n"RESET, message);
+	exit(EXIT_FAILURE);
+}
+void	exit_error(char *message)
+{
+	ft_printf(RED"\nError\n"GREY"%s\n"RESET, message);
 	exit(EXIT_FAILURE);
 }
