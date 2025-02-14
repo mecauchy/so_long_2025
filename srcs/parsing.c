@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:48:45 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/13 13:48:38 by mcauchy-         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:45:39 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,17 @@ void	check_valide_map(t_list *lst)
 		ft_free_error("Invalid map format", lst);
 	while (lst->map[i])
 	{
+		printf("map[i] == %d, lst.largeur == %d\n", ft_strlen(lst->map[i]), lst->largeur_map);
 		if (!lst->map[i])
 			ft_free_error("ERR02\n", lst);
-		if (ft_strlen(lst->map[i]) == 0 || (ft_strlen(lst->map[i]) == 1 && lst->map[i][0] == '\n'))
+		if (ft_strlen(lst->map[i]) != lst->longueur_map)
+		{
 			ft_free_error("ERR03\n", lst);
-		i++;		
+		}
+		i++;
 	}
+	if (i != lst->largeur_map)
+		ft_free_error("Invalid map.\nEmpty line in map\n", lst);
 }
 
 int	ft_only_sep(char *str)
@@ -193,9 +198,8 @@ int	size_map(t_list *lst)
 		count++;
 		free(line);
 		line = get_next_line(lst->fd);
-		// gnl_cleanup();
 		// if (!line)
-		// 	break ;
+		// 	exit(1);
 	}
 	lst->largeur_map = count;
 	close(lst->fd);
@@ -225,7 +229,7 @@ void	parsing(t_list *lst)
 	// check_file(lst);
 	size_map(lst);
 	stock_map(lst);
-	// check_valide_map(lst);
+	check_valide_map(lst);
 	check_size(lst);
 	check_corner(lst);
 	fill_mapinfo(lst);

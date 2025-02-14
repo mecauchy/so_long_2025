@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:18:20 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/06 11:04:57 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:18:25 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strdup(const char *s1)
 
 	i = 0;
 	s2 = malloc(sizeof (char) * ft_strlen(s1) + 1);
-	if (!s2)
+	if (!s1 || !s2)
 		return (0);
 	while (s1[i])
 	{

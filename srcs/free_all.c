@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 12:42:50 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/13 14:41:49 by mcauchy-         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:05:39 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	destroy_images(t_list *lst)
 		mlx_destroy_image(lst->mlx, lst->player.player_left);
 	if (lst->player.player_right)
 		mlx_destroy_image(lst->mlx, lst->player.player_right);
+	if (lst->img_perso && (lst->img_perso != lst->player.player_left && lst->img_perso != lst->player.player_up && lst->img_perso != lst->player.player_right && lst->img_perso != lst->player.player_down))
+		mlx_destroy_image(lst->mlx, lst->img_perso);
 }
 
 void	ft_error(char *message, t_list *lst)
