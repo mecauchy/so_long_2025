@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:39:17 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/13 12:32:06 by mcauchy-         ###   ########.fr       */
+/*   Updated: 2025/02/16 13:17:58 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@
 # include <stdarg.h>
 # include <stdlib.h>
 # include <fcntl.h>
-
 
 typedef	struct s_img
 {

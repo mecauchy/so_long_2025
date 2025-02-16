@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:48:45 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/14 12:45:39 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/16 13:24:50 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_only_sep(char *str)
 void	stock_map(t_list *lst)
 {
 	char	*line;
-	char	*tmp;
+	char	*tmp;''
 	int		file;
 
 	file = open(lst->path, O_RDONLY);

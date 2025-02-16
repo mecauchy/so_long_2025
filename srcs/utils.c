@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:29:15 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/10 12:51:20 by mcauchy-         ###   ########.fr       */
+/*   Updated: 2025/02/16 13:52:14 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,9 @@ void	find_position(t_list *lst)
 	pos_y = 0;
 	if (!lst->map)
 		exit(1);
-	// while (pos_y < lst->largeur_map)
 	while (lst->map[pos_y])
 	{
 		pos_x = 0;
-		// while (pos_x < lst->longueur_map)
 		while (lst->map[pos_y][pos_x])
 		{
 			if (lst->map[pos_y][pos_x] == 'P')
@@ -34,7 +32,6 @@ void	find_position(t_list *lst)
 				lst->x = pos_x;
 				printf("pos_x == %d\n", pos_x);
 				printf("pos_y == %d\n", pos_y);
-				// return ;
 			}
 			pos_x++;
 		}
