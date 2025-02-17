@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:10:43 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/14 12:34:55 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:39:16 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,8 @@ void	init_game(t_list *lst)
 	lst->map_info.nb_exit = 0;
 	lst->map_info.nb_player = 0;
 	lst->map_info.nb_collectible = 0;
+	lst->map_info.nb_collectible_found = 0;
+	lst->map_info.nb_exit_found = 0;
 	lst->player.player_up = NULL;
 	lst->player.player_down = NULL;
 	lst->player.player_left = NULL;

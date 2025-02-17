@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:39:17 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/17 13:52:04 by mcauchy-         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:37:58 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ typedef	struct s_map
 	unsigned int	nb_exit;	
 	unsigned int	nb_player;
 	unsigned int	nb_collectible;
+	unsigned int	nb_collectible_found;
+	unsigned int	nb_exit_found;
 }				t_map;
 
 typedef	struct s_list

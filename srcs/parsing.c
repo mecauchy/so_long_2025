@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:48:45 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/17 13:55:25 by mcauchy-         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:45:47 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,9 +141,21 @@ void	check_corner(t_list *lst)
 
 void	flood_fill(char **map, int x, int y)
 {
-	if (map[y][x] == '1' || map[y][x] == 'X')
+	if (map[y][x] == 'C')
+	{
+		lst.map_info.nb_collectible_found--;
+		map[y][x] = '1';
+	}
+	else if (map[y][x] == 'E')
+	{
+		lst.map_info.nb_exit_found--;
+		map[y][x] = '1';
+	}
+	else if (map[y][x] == 'P' || map[y][x] == '0')
+		map[y][x] = '1';
+	else
 		return ;
-	map[y][x] = 'X';
+	// map[y][x] = 'X';
 	flood_fill(map, x + 1, y);
 	flood_fill(map, x - 1, y);
 	flood_fill(map, x, y + 1);
@@ -156,25 +168,15 @@ void		validate_path(t_list *lst)
 	int		y;
 
 	y = 0;
+	lst->map_info.nb_collectible_found = lst->map_info.nb_collectible;
+	lst.map_info.nb_exit_found = lst.map_info.nb_exit;
 	find_position(lst);
 	flood_fill(lst->map_copy, lst->x, lst->y);
-	while (y < lst->largeur_map)
+	if (lst->map_info.nb_collectible_found != 0 || lst->map_info.nb_exit_found > 0)
 	{
-		x = 0;
-		while (x < lst->longueur_map)
-		{
-			if (lst->map[y][x] == 'C' && lst->map_copy[y][x] != 'X')
-			{
-				ft_putendl_fd("Invalid map : Collectible not reachable", 2);
-				free_map(lst->map_copy);
-				exit(1);
-			}
-			// 	ft_free_error("Invalid map : Collectible not reachable", lst);
-			if (lst->map[y][x] == 'E' && lst->map_copy[y][x] != 'X')
-				ft_free_error("Invalid map : Exit not reachable", lst);
-			x++;
-		}
-		y++;
+		ft_putendl_fd("Error : No valid path", 2);
+		free_map(lst->map_copy);
+		exit(EXIT_FAILURE)
 	}
 	free_map(lst->map_copy);
 }
