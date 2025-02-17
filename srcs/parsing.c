@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:48:45 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/16 14:18:18 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/17 13:55:25 by mcauchy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	stock_map(t_list *lst)
 	if (!lst->stock)
 	{
 		close(file);
-		// gnl_cleanup();
 		ft_error("Memory allocation failed", lst);
 	}
 	while (1)
@@ -76,13 +75,12 @@ void	stock_map(t_list *lst)
 		}
 	}
 	lst->map = ft_split(lst->stock, '\n');
+	lst->map_copy = ft_split(lst->stock, '\n');
 	free(lst->stock);
 	lst->stock = NULL;
-	// check_valide_map(lst);
-	if (!lst->map)
+	if (!lst->map || !lst->map_copy)
 	{
 		close(file);
-		// gnl_cleanup();
 		ft_error("Invalid map format", lst);
 	}
 	close(file);
@@ -141,6 +139,46 @@ void	check_corner(t_list *lst)
 		ft_free_error("Invalide size map", lst);
 }
 
+void	flood_fill(char **map, int x, int y)
+{
+	if (map[y][x] == '1' || map[y][x] == 'X')
+		return ;
+	map[y][x] = 'X';
+	flood_fill(map, x + 1, y);
+	flood_fill(map, x - 1, y);
+	flood_fill(map, x, y + 1);
+	flood_fill(map, x, y - 1);
+}
+
+void		validate_path(t_list *lst)
+{
+	int		x;
+	int		y;
+
+	y = 0;
+	find_position(lst);
+	flood_fill(lst->map_copy, lst->x, lst->y);
+	while (y < lst->largeur_map)
+	{
+		x = 0;
+		while (x < lst->longueur_map)
+		{
+			if (lst->map[y][x] == 'C' && lst->map_copy[y][x] != 'X')
+			{
+				ft_putendl_fd("Invalid map : Collectible not reachable", 2);
+				free_map(lst->map_copy);
+				exit(1);
+			}
+			// 	ft_free_error("Invalid map : Collectible not reachable", lst);
+			if (lst->map[y][x] == 'E' && lst->map_copy[y][x] != 'X')
+				ft_free_error("Invalid map : Exit not reachable", lst);
+			x++;
+		}
+		y++;
+	}
+	free_map(lst->map_copy);
+}
+
 void	fill_mapinfo(t_list *lst)
 {
 	int	x;
@@ -184,11 +222,9 @@ int	size_map(t_list *lst)
 	line = get_next_line(lst->fd);
 	if (!line)
 	{
-		// gnl_cleanup();
 		close(lst->fd);
 		exit_error("Empty file");
 	}
-	// gnl_cleanup();
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
 		len--;	
@@ -198,12 +234,9 @@ int	size_map(t_list *lst)
 		count++;
 		free(line);
 		line = get_next_line(lst->fd);
-		// if (!line)
-		// 	exit(1);
 	}
 	lst->largeur_map = count;
 	close(lst->fd);
-	// gnl_cleanup();
 	return (count);
 }
 
@@ -217,16 +250,9 @@ void	check_parameters(t_list *lst)
 		ft_free_error("Invalid Map. There must be at least one collectible", lst);
 }
 
-// void	parsing(t_list *lst)
-// {
-// 	size_map(lst);
-// 	stock_map(lst);
-// 	fill_mapinfo(lst);
-// }
 
 void	parsing(t_list *lst)
 {
-	// check_file(lst);
 	size_map(lst);
 	stock_map(lst);
 	check_valide_map(lst);
@@ -234,5 +260,5 @@ void	parsing(t_list *lst)
 	check_corner(lst);
 	fill_mapinfo(lst);
 	check_parameters(lst);
-	// gnl_cleanup();
+	validate_path(lst);
 }
