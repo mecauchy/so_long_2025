@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:48:45 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/17 16:45:47 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:25:55 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,44 +139,42 @@ void	check_corner(t_list *lst)
 		ft_free_error("Invalide size map", lst);
 }
 
-void	flood_fill(char **map, int x, int y)
+void	flood_fill(char **map, int x, int y, t_list *lst)
 {
 	if (map[y][x] == 'C')
 	{
-		lst.map_info.nb_collectible_found--;
+		lst->map_info.nb_collectible_found--;
 		map[y][x] = '1';
 	}
 	else if (map[y][x] == 'E')
 	{
-		lst.map_info.nb_exit_found--;
+		lst->map_info.nb_exit_found--;
 		map[y][x] = '1';
+		return ;
 	}
 	else if (map[y][x] == 'P' || map[y][x] == '0')
 		map[y][x] = '1';
 	else
 		return ;
 	// map[y][x] = 'X';
-	flood_fill(map, x + 1, y);
-	flood_fill(map, x - 1, y);
-	flood_fill(map, x, y + 1);
-	flood_fill(map, x, y - 1);
+	flood_fill(map, x + 1, y, lst);
+	flood_fill(map, x - 1, y, lst);
+	flood_fill(map, x, y + 1, lst);
+	flood_fill(map, x, y - 1, lst);
 }
 
 void		validate_path(t_list *lst)
 {
-	int		x;
-	int		y;
-
-	y = 0;
 	lst->map_info.nb_collectible_found = lst->map_info.nb_collectible;
-	lst.map_info.nb_exit_found = lst.map_info.nb_exit;
+	lst->map_info.nb_exit_found = 1;
 	find_position(lst);
-	flood_fill(lst->map_copy, lst->x, lst->y);
-	if (lst->map_info.nb_collectible_found != 0 || lst->map_info.nb_exit_found > 0)
+	flood_fill(lst->map_copy, lst->x, lst->y, lst);
+	if (lst->map_info.nb_collectible_found != 0 || lst->map_info.nb_exit_found != 0)
 	{
 		ft_putendl_fd("Error : No valid path", 2);
 		free_map(lst->map_copy);
-		exit(EXIT_FAILURE)
+		free_map(lst->map);
+		exit(EXIT_FAILURE);
 	}
 	free_map(lst->map_copy);
 }

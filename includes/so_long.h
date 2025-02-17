@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:39:17 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/17 16:37:58 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:55:56 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,6 @@ void			check_size(t_list *lst);
 void			exit_error(char *message);
 
 void			validate_path(t_list *lst);
-void			flood_fill(char **map, int x, int y);
+void			flood_fill(char **map, int x, int y, t_list *lst);
 
 #endif
