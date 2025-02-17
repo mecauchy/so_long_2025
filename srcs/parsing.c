@@ -6,7 +6,7 @@
 /*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:48:45 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/17 17:25:55 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:31:57 by mecauchy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,6 @@ void	flood_fill(char **map, int x, int y, t_list *lst)
 		map[y][x] = '1';
 	else
 		return ;
-	// map[y][x] = 'X';
 	flood_fill(map, x + 1, y, lst);
 	flood_fill(map, x - 1, y, lst);
 	flood_fill(map, x, y + 1, lst);
