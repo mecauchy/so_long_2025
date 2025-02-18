@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:39:17 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/17 16:55:56 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:03:38 by mcauchy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,9 @@ int				check_size_line(t_list *lst);
 void			check_valide_map(t_list *lst);
 void			check_size(t_list *lst);
 void			exit_error(char *message);
-
+void			init_lst(t_list *lst);
 void			validate_path(t_list *lst);
+void			close_error(int file, char *message, t_list *lst);
 void			flood_fill(char **map, int x, int y, t_list *lst);
 
 #endif

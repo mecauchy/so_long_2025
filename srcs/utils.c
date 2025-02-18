@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:29:15 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/16 13:52:14 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/18 11:42:55 by mcauchy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	find_position(t_list *lst)
 			{
 				lst->y = pos_y;
 				lst->x = pos_x;
-				printf("pos_x == %d\n", pos_x);
-				printf("pos_y == %d\n", pos_y);
 			}
 			pos_x++;
 		}

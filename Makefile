@@ -3,15 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+         #
+#    By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/05 14:00:29 by mcauchy-          #+#    #+#              #
-#    Updated: 2025/02/14 11:24:54 by mecauchy         ###   ########.fr        #
+#    Updated: 2025/02/18 12:47:41 by mcauchy-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_FILES		=	./srcs/so_long.c ./srcs/move.c ./srcs/parsing.c ./srcs/utils.c ./srcs/bonus.c ./srcs/free_all.c
- 
+SRC_FILES		=	./srcs/so_long.c ./srcs/move.c ./srcs/parsing.c \
+					./srcs/utils.c ./srcs/bonus.c ./srcs/free_all.c \
+					./srcs/parsing_utils.c ./srcs/parsing_map.c \
+					./srcs/position.c ./srcs/make_map.c \
+				
 LIBFT			=	libft/libft.a
  
 MLX				=	minilibx-linux/libmlx_Linux.a 
