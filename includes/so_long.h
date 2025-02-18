@@ -6,7 +6,7 @@
 /*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:39:17 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/18 14:18:58 by mcauchy-         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:42:52 by mcauchy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,47 +97,87 @@ typedef struct s_list
 	t_img	player;
 }				t_list;
 
-void			update_window(t_list *lst);
+// ---------------------------------------------------------------------------
+//				INITIALISATION
+// ---------------------------------------------------------------------------
+
+void			init_game(t_list *lst);
+void			init_lst(t_list *lst);
+void			load_presentation_images(t_list *lst);
+void			launch_presentation(t_list *lst);
+
+// ---------------------------------------------------------------------------
+//				PARSING
+// ---------------------------------------------------------------------------
+
 void			parsing(t_list *lst);
-int				size_map(t_list *lst);
-void			fill_mapinfo(t_list *lst);
-void			check_corner(t_list *lst);
 void			stock_map(t_list *lst);
+int				create_map(t_list *lst);
+void			fill_mapinfo(t_list *lst);
+void			stock_read_line(t_list *lst, int file);
+void			assign_map(t_list *lst);
+void			assign_perso(t_list *lst);
+int				size_map(t_list *lst);
+
+// ---------------------------------------------------------------------------
+//				UTILS
+// ---------------------------------------------------------------------------
+
+void			check_parameters(t_list *lst);
+void			check_cmd_arguments(int ac, char **av);
+void			check_corner(t_list *lst);
+void			check_valide_map(t_list *lst);
+void			check_size(t_list *lst);
+int				check_size_line(t_list *lst);
+void			validate_path(t_list *lst);
+void			flood_fill(char **map, int x, int y, t_list *lst);
+
+// ---------------------------------------------------------------------------
+//				PRESENTATION
+// ---------------------------------------------------------------------------
+
+void			launch_presentation(t_list *lst);
+int				presentation_keypress(int key, t_list *lst);
+
+// ---------------------------------------------------------------------------
+//				IMAGE
+// ---------------------------------------------------------------------------
+
+void			update_window(t_list *lst);
+void			add_image(t_list *lst, int x, int y);
+void			destroy_images(t_list *lst);
+
+// ---------------------------------------------------------------------------
+//				MOVE
+// ---------------------------------------------------------------------------
+
 void			move_right(t_list *lst);
 void			move_left(t_list *lst);
 void			move_down(t_list *lst);
 void			move_up(t_list *lst);
-void			init_game(t_list *lst);
-void			exit_game(t_list *lst, int value);
-int				key_press(int key, t_list *lst);
-int				create_map(t_list *lst);
-void			find_position(t_list *lst);
-void			assign_map(t_list *lst);
-char			*player_move(t_list *lst);
-int				free_exit_game(t_list *lst);
 void			set_player_position(t_list *lst, int key);
-void			launch_presentation(t_list *lst);
+char			*player_move(t_list *lst);
+void			find_position(t_list *lst);
+
+// ---------------------------------------------------------------------------
+//				KEY
+// ---------------------------------------------------------------------------
+
+int				key_press(int key, t_list *lst);
 int				presentation_keypress(int key, t_list *lst);
-void			load_presentation_images(t_list *lst);
+
+// ---------------------------------------------------------------------------
+//				EXIT
+// ---------------------------------------------------------------------------
+
 void			ft_error(char *message, t_list *lst);
 void			ft_free_error(char *message, t_list *lst);
-void			destroy_images(t_list *lst);
 void			free_all_game(t_list *lst);
+int				free_exit_game(t_list *lst);
 void			free_map(char **map);
-void			check_parameters(t_list *lst);
-void			check_cmd_arguments(int ac, char **av);
-void			gnl_cleanup(void);
-int				check_size_line(t_list *lst);
-void			check_valide_map(t_list *lst);
-void			check_size(t_list *lst);
-void			exit_error(char *message);
-void			init_lst(t_list *lst);
-void			validate_path(t_list *lst);
 void			close_error(int file, char *message, t_list *lst);
-void			flood_fill(char **map, int x, int y, t_list *lst);
-void			assign_perso(t_list *lst);
-void			stock_read_line(t_list *lst, int file);
-void			add_image(t_list *lst, int x, int y);
 void			close_the_error(int file, char *message);
+void			exit_error(char *message);
+void			exit_game(t_list *lst, int value);
 
 #endif

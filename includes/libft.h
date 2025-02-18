@@ -6,7 +6,7 @@
 /*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:24:03 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/18 14:18:39 by mcauchy-         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:38:46 by mcauchy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <stdarg.h>
+
+// ---------------------------------------------------------------------------
+//				LIBFT
+// ---------------------------------------------------------------------------
 
 int		ft_isalpha(int c);
 int		ft_strlen(const char *str);
@@ -64,14 +68,18 @@ char	**ft_split(char const *s, char c);
 size_t	ft_strlcpy(char *dest, char const *src, size_t size);
 size_t	ft_strlcat(char *dest, const char *src, size_t size);
 
-// GET_LINE //
+// ---------------------------------------------------------------------------
+//				GET NEXT LINE
+// ---------------------------------------------------------------------------
 
 char	*get_line(char **backup, char **line);
 int		read_line(int fd, char **buffer, char **backup, char **line);
 char	*get_next_line(int fd);
 void	ft_free_ptr(char **ptr);
 
-// PRINTF //
+// ---------------------------------------------------------------------------
+//				FT PRINTF
+// ---------------------------------------------------------------------------
 
 int		ft_printf(const char *format, ...);
 int		ft_print_exec(va_list arg, char *format);
