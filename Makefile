@@ -6,14 +6,14 @@
 #    By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/05 14:00:29 by mcauchy-          #+#    #+#              #
-#    Updated: 2025/02/18 12:47:41 by mcauchy-         ###   ########.fr        #
+#    Updated: 2025/02/18 14:26:41 by mcauchy-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC_FILES		=	./srcs/so_long.c ./srcs/move.c ./srcs/parsing.c \
-					./srcs/utils.c ./srcs/bonus.c ./srcs/free_all.c \
-					./srcs/parsing_utils.c ./srcs/parsing_map.c \
-					./srcs/position.c ./srcs/make_map.c \
+SRC_FILES		=	./srcs/so_long.c ./srcs/move.c ./srcs/parsing.c		\
+					./srcs/utils.c ./srcs/bonus.c ./srcs/free_all.c		\
+					./srcs/parsing_utils.c ./srcs/parsing_map.c			\
+					./srcs/position.c ./srcs/make_map.c ./srcs/init.c	\
 				
 LIBFT			=	libft/libft.a
  

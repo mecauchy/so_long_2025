@@ -6,13 +6,13 @@
 /*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 12:39:17 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/18 13:03:38 by mcauchy-         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:18:58 by mcauchy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 
-#define SO_LONG_H
+# define SO_LONG_H
 
 # define UP			65362
 # define DOWN		65364
@@ -46,7 +46,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 
-typedef	struct s_img
+typedef struct s_img
 {
 	void	*player_up;
 	void	*player_down;
@@ -54,7 +54,7 @@ typedef	struct s_img
 	void	*player_right;
 }				t_img;
 
-typedef	struct s_map
+typedef struct s_map
 {
 	unsigned int	nb_coin;
 	unsigned int	nb_exit;	
@@ -64,7 +64,7 @@ typedef	struct s_map
 	unsigned int	nb_exit_found;
 }				t_map;
 
-typedef	struct s_list
+typedef struct s_list
 {
 	void	*img;
 	void	*mlx;
@@ -103,8 +103,6 @@ int				size_map(t_list *lst);
 void			fill_mapinfo(t_list *lst);
 void			check_corner(t_list *lst);
 void			stock_map(t_list *lst);
-// void			check_file(t_list *lst);
-// void			check_valide_map(t_list *lst);
 void			move_right(t_list *lst);
 void			move_left(t_list *lst);
 void			move_down(t_list *lst);
@@ -121,7 +119,6 @@ void			set_player_position(t_list *lst, int key);
 void			launch_presentation(t_list *lst);
 int				presentation_keypress(int key, t_list *lst);
 void			load_presentation_images(t_list *lst);
-
 void			ft_error(char *message, t_list *lst);
 void			ft_free_error(char *message, t_list *lst);
 void			destroy_images(t_list *lst);
@@ -138,5 +135,9 @@ void			init_lst(t_list *lst);
 void			validate_path(t_list *lst);
 void			close_error(int file, char *message, t_list *lst);
 void			flood_fill(char **map, int x, int y, t_list *lst);
+void			assign_perso(t_list *lst);
+void			stock_read_line(t_list *lst, int file);
+void			add_image(t_list *lst, int x, int y);
+void			close_the_error(int file, char *message);
 
 #endif

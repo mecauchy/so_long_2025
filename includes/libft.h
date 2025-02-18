@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mecauchy <mecauchy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 17:24:03 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/12 16:35:29 by mecauchy         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:18:39 by mcauchy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 # include <fcntl.h>
 # include <limits.h>
 # include <stdarg.h>
-
 
 int		ft_isalpha(int c);
 int		ft_strlen(const char *str);
@@ -67,14 +66,8 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size);
 
 // GET_LINE //
 
-// char	*get_next_line(int fd);
-// char	*read_to_next_str(char *next_str, int fd);
-// char	*ft_get_line(char *next_str);
-// char	*new_line(char *next_str);
-// char	*ft_find_newline(char *s);
-
 char	*get_line(char **backup, char **line);
-int	read_line(int fd, char **buffer, char **backup, char **line);
+int		read_line(int fd, char **buffer, char **backup, char **line);
 char	*get_next_line(int fd);
 void	ft_free_ptr(char **ptr);
 

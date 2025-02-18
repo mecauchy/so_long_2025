@@ -6,7 +6,7 @@
 /*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 14:28:25 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/18 12:48:37 by mcauchy-         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:26:07 by mcauchy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,12 @@ int	free_exit_game(t_list *lst)
 	free_all_game(lst);
 	exit(EXIT_FAILURE);
 	return (0);
+}
+
+void	check_size(t_list *lst)
+{
+	if (lst->largeur_map < 3 || lst->longueur_map < 3)
+		ft_free_error("Invalid size", lst);
 }
 
 void	load_presentation_images(t_list *lst)

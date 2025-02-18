@@ -6,7 +6,7 @@
 /*   By: mcauchy- <mcauchy-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 11:48:45 by mcauchy-          #+#    #+#             */
-/*   Updated: 2025/02/18 12:35:14 by mcauchy-         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:48:45 by mcauchy-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ void	fill_mapinfo(t_list *lst)
 	}
 }
 
+void	close_the_error(int file, char *message)
+{
+	close(file);
+	exit_error(message);
+}
+
 int	size_map(t_list *lst)
 {
 	char	*line;
@@ -53,10 +59,7 @@ int	size_map(t_list *lst)
 		exit_error("Cannot open file");
 	line = get_next_line(lst->fd);
 	if (!line)
-	{
-		close(lst->fd);
-		exit_error("Empty file");
-	}
+		close_the_error(lst->fd, "Empty file");
 	len = ft_strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
 		len--;
